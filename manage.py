@@ -2,13 +2,10 @@ import csv
 import os
 import unittest
 
-from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
 from app import blueprint
 
-from app.src import create_app, db
-from app.src.users.models import User
-from app.src.states.models import State
+from app.src import create_app
 from app.src.states.preloader import preload_data
 
 app = create_app(os.getenv("APP_ENV", "dev"))
@@ -16,10 +13,6 @@ app.register_blueprint(blueprint)
 app.app_context().push()
 
 manager = Manager(app)
-
-migrate = Migrate(app, db)
-
-manager.add_command("db", MigrateCommand)
 
 
 @manager.command

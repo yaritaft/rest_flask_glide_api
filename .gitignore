@@ -7,9 +7,6 @@ venv/
 # Ide files
 .vscode/
 
-# DB volumen data
-data/
-
 # Python cache
 __pycache__/
 
@@ -20,5 +17,4 @@ __pycache__/
 .env
 
 # TODO DECOMMENT DELETE THIS IGNORE
-db_config/
 flask_app/
