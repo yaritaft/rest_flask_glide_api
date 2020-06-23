@@ -9,8 +9,7 @@ RUN apk add curl
 RUN apk update
 RUN apk add linux-headers
 RUN apk add build-base
-RUN apk add postgresql-libs
-RUN apk add --virtual .build-deps gcc musl-dev postgresql-dev libffi-dev python3-dev
+# RUN apk add --virtual .build-deps gcc musl-dev postgresql-dev libffi-dev python3-dev
 RUN pip install --upgrade pip
 WORKDIR /app
 ADD ./requirements.txt /app

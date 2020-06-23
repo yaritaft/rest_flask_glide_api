@@ -1,30 +1,12 @@
 version: '3.3'
 
 services:
-  db:
-    restart: always
-    image: postgres:11.4-alpine
-    ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 123456789
-      POSTGRES_DB: mydatabase
-    volumes:
-      - ./data:/var/lib/postgresql/data
-    
   api:
     command: >
-      sh -c "pip install -r requirements-dev.txt &&
-        wait-for-it --service db:5432 &&
-        python manage.py db upgrade &&
-        python manage.py load_initial_data  &&
+      sh -c "python manage.py load_initial_data  &&
         uwsgi --thunder-lock --ini uwsgi.ini"
     ports:
       - "5000:5000"
-    depends_on:
-      - db
     environment:
-      DATABASE_URL: postgresql+psycopg2://postgres:123456789@db/mydatabase
       SECRET_KEY: mysecretkey
       APP_ENV: dev
