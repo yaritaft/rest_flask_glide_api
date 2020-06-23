@@ -1,0 +1,6 @@
+[flake8]
+ignore = D100, D104, D105, D107, E203, E266, F403, W503
+max-line-length = 79
+application_import_names = app
+import-order-style = appnexus
+exclude = .git, config.py, manage.py, **__pycache__**, **migrations*, **venv**, venv, **tests**

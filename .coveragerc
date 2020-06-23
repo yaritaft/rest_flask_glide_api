@@ -1,0 +1,15 @@
+[run]
+branch = True
+omit =
+    */django/utils/autoreload.py
+source = app
+
+[report]
+ignore_errors = True
+omit =
+    */env/*
+    */venv/*
+   manage.py
+
+[html]
+directory = coverage_html
