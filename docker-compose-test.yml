@@ -1,0 +1,26 @@
+version: '3.3'
+
+services:
+  db:
+    restart: always
+    image: postgres:11.4-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456789
+      POSTGRES_DB: mytestingdb
+    tmpfs:
+      - /var/lib/postgresql/data
+
+  api:
+    command: >
+      sh -c "pip install -r requirements-test.txt &&
+      wait-for-it --service db:5432 &&
+      coverage run manage.py test"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql+psycopg2://postgres:123456789@db/mytestingdb
+      SECRET_KEY: mysecretkey
+      APP_ENV: testing
